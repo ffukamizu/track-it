@@ -1,7 +1,8 @@
 import styled from "styled-components";
-
 import Logo from "./../../public/assets/logo.svg";
+
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function LoginScreen() {
   const [userEmail, setUserEmail] = useState("");
@@ -15,7 +16,7 @@ export default function LoginScreen() {
         <Input type="password" placeholder="password" required value={userPassword} onChange={setUserPassword}></Input>
         <SubmitButton type="submit" placeholder="Submit"></SubmitButton>
       </FormSection>
-      <UserRegisterLink>Não tem uma conta? Cadastre-se!</UserRegisterLink>
+      <Link to={`/cadastro`}><UserRegisterLink>Não tem uma conta? Cadastre-se!</UserRegisterLink></Link>
     </PageBody>
   );
 }
@@ -25,10 +26,10 @@ const PageBody = styled.div`
   width: 100%;
   background-color: #ffffff;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
   img {
+    margin-top: 20vh;
     margin-bottom: 26px;
   }
 `;
@@ -38,6 +39,7 @@ const FormSection = styled.form`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 25px;
 `;
 
 const Input = styled.input`
@@ -82,5 +84,4 @@ const UserRegisterLink = styled.a`
   text-align: center;
   text-decoration-line: underline;
   color: #52b6ff;
-  margin-top: 25px;
 `;

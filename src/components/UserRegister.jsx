@@ -1,7 +1,8 @@
 import styled from "styled-components";
-
 import Logo from "./../../public/assets/logo.svg";
+
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function UserRegister() {
   const [email, setEmail] = useState("");
@@ -19,7 +20,7 @@ export default function UserRegister() {
         <Input type="text" placeholder="photo" required value={photo} onChange={setPhoto}></Input>
         <SubmitButton type="submit" placeholder="Submit"></SubmitButton>
       </FormSection>
-      <UserRegisterLink>Já tem uma conta? Faça login!</UserRegisterLink>
+      <Link to={`/`}><UserRegisterLink>Já tem uma conta? Faça login!</UserRegisterLink></Link>
     </PageBody>
   );
 }
@@ -29,10 +30,10 @@ const PageBody = styled.div`
   width: 100%;
   background-color: #ffffff;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
   img {
+    margin-top: 20vh;
     margin-bottom: 26px;
   }
 `;
@@ -42,6 +43,7 @@ const FormSection = styled.form`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 25px;
 `;
 
 const Input = styled.input`
@@ -86,5 +88,4 @@ const UserRegisterLink = styled.a`
   text-align: center;
   text-decoration-line: underline;
   color: #52b6ff;
-  margin-top: 25px;
 `;
