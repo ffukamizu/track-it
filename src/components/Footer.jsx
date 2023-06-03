@@ -24,7 +24,7 @@ const PageFooter = styled.footer`
     justify-content: center;
     align-items: center;
     background-color: #ffffff;
-    position: absolute;
+    position: fixed;
     z-index: 3;
 `;
 
@@ -52,15 +52,15 @@ const FooterContainer = styled.nav`
 const ProgressIndicatorContainer = styled.div`
     width: 91px;
     height: 91px;
-    margin-bottom: 40px;
-    background: #52b6ff;
     border-radius: 50px;
+    margin-bottom: 40px;
     font-family: "Lexend Deca";
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
     text-align: center;
+    background: #52b6ff;
     color: #ffffff;
     display: flex;
     justify-content: center;
