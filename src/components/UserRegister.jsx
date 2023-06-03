@@ -79,7 +79,7 @@ const SubmitButton = styled.input`
   margin-top: 6px;
 `;
 
-const UserRegisterLink = styled.a`
+const UserRegisterLink = styled.p`
   font-family: "Lexend Deca";
   font-style: normal;
   font-weight: 400;
