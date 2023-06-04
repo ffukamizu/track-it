@@ -21,7 +21,7 @@ export default function UserRegister() {
                 <SubmitButton type="submit" placeholder="Register"></SubmitButton>
             </FormSection>
             <Link to={`/`}>
-                <UserRegisterLink>Já tem uma conta? Faça login!</UserRegisterLink>
+                <UserRegisterLink>Already have an account? Log-in now!</UserRegisterLink>
             </Link>
         </PageBody>
     );

@@ -17,7 +17,7 @@ export default function LoginScreen() {
                 <SubmitButton type="submit" placeholder="Submit"></SubmitButton>
             </FormSection>
             <Link to={`/cadastro`}>
-                <UserRegisterLink>Não tem uma conta? Cadastre-se!</UserRegisterLink>
+                <UserRegisterLink>Don&apos;t have an account? Sign-up now!</UserRegisterLink>
             </Link>
         </PageBody>
     );

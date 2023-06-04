@@ -10,14 +10,14 @@ export default function Footer() {
     return (
         <PageFooter>
             <FooterContainer>
-                <Link to={`/habitos`}>Hábitos</Link>
+                <Link to={`/habitos`}>Habit</Link>
                 <Link to={`/hoje`}>
                     <ProgressIndicatorContainer>
                         <CircularProgressbar
                             background
                             backgroundPadding={6}
                             value={percentage}
-                            text={"Hoje"}
+                            text={"Today"}
                             styles={buildStyles({
                                 rotation: 0.25,
                                 strokeLinecap: "round",
@@ -32,7 +32,7 @@ export default function Footer() {
                         />
                     </ProgressIndicatorContainer>
                 </Link>
-                <Link to={`/historico`}>Histórico</Link>
+                <Link to={`/historico`}>History</Link>
             </FooterContainer>
         </PageFooter>
     );

@@ -5,21 +5,23 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import InputHabitModule from "../components/InputHabit";
 import Habit from "../components/Habit";
+import GlobalStyle from "../style/GlobalStyle";
 
 export default function Habits() {
     return (
         <PageBody>
+            <GlobalStyle />
             <Header />
             <HorizontalSeparator></HorizontalSeparator>
             <ContentContainer>
                 <AddHabitContainer>
-                    <h2>Meus Hábitos</h2>
+                    <h2>My habits</h2>
                     <PlusButton>
                         <img src={Plus} alt="Add Habit Button" />
                     </PlusButton>
                 </AddHabitContainer>
                 <InputHabitModule />
-                <NoHabitMessage>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</NoHabitMessage>
+                <NoHabitMessage>You don&apos;t have any registered habit. Add one now to begin tracking!</NoHabitMessage>
                 <HabitListContainer>
                     <Habit />
                 </HabitListContainer>
@@ -33,7 +35,6 @@ export default function Habits() {
 const PageBody = styled.div`
     height: 100%;
     width: 100%;
-    background-color: #f2f2f2;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,11 +50,10 @@ const ContentContainer = styled.div`
 const AddHabitContainer = styled.div`
     height: 35px;
     width: 100%;
-    margin-top: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 22px;
+    margin-bottom: 30px;
     h2 {
         font-family: "Lexend Deca";
         font-style: normal;
@@ -93,6 +93,6 @@ const HabitListContainer = styled.ul`
 `;
 
 const HorizontalSeparator = styled.div`
-    height: 70px;
+    height: 100px;
     width: 100%;
 `;
