@@ -14,10 +14,10 @@ export default function UserRegister() {
         <PageBody>
             <img src={Logo} alt="Logo Icon" />
             <FormSection>
-                <Input type="email" placeholder="  email" required value={email} onChange={setEmail}></Input>
-                <Input type="password" placeholder="  password" required value={password} onChange={setPassword}></Input>
-                <Input type="text" placeholder="  name" required value={name} onChange={setName}></Input>
-                <Input type="text" placeholder="  photo" required value={photo} onChange={setPhoto}></Input>
+                <Input type="email" placeholder="email" required value={email} onChange={setEmail}></Input>
+                <Input type="password" placeholder="password" required value={password} onChange={setPassword}></Input>
+                <Input type="text" placeholder="name" required value={name} onChange={setName}></Input>
+                <Input type="text" placeholder="photo" required value={photo} onChange={setPhoto}></Input>
                 <SubmitButton type="submit" placeholder="Register"></SubmitButton>
             </FormSection>
             <Link to={`/`}>
@@ -61,8 +61,13 @@ const Input = styled.input`
     font-weight: 400;
     font-size: 20px;
     line-height: 25px;
+    color: #666666;
+    padding: 10px;
     ::placeholder {
         color: #d5d5d5;
+    }
+    :focus {
+        outline: 2px solid #d5d5d5;
     }
 `;
 

@@ -4,6 +4,7 @@ import Plus from "./../../public/assets/plus.svg";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import InputHabitModule from "../components/InputHabit";
+import Habit from "../components/Habit";
 
 export default function Habits() {
     return (
@@ -19,6 +20,9 @@ export default function Habits() {
                 </AddHabitContainer>
                 <InputHabitModule />
                 <NoHabitMessage>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</NoHabitMessage>
+                <HabitListContainer>
+                    <Habit />
+                </HabitListContainer>
             </ContentContainer>
             <HorizontalSeparator></HorizontalSeparator>
             <Footer />
@@ -49,6 +53,7 @@ const AddHabitContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 22px;
     h2 {
         font-family: "Lexend Deca";
         font-style: normal;
@@ -74,13 +79,17 @@ const PlusButton = styled.button`
 const NoHabitMessage = styled.p`
     width: 340px;
     height: 74px;
-    margin-top: 30px;
     font-family: "Lexend Deca";
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
     color: #666666;
+`;
+
+const HabitListContainer = styled.ul`
+    height: 100%;
+    width: 340px;
 `;
 
 const HorizontalSeparator = styled.div`

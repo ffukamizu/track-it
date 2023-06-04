@@ -5,7 +5,7 @@ export default function InputHabitModule() {
 
     return (
         <FormSection>
-            <InputHabit type='text' placeholder="  nome do hábito" required></InputHabit>
+            <InputHabit type='text' placeholder="nome do hábito" required></InputHabit>
             <WeekdayButtonContainer>
                 {weekDays.map((day, index) => (
                     <DayButton type='button' key={index}>{day}</DayButton>
@@ -21,10 +21,10 @@ export default function InputHabitModule() {
 
 const FormSection = styled.form`
     height: 150px;
-    margin-top: 22px;
     background: #ffffff;
     border-radius: 5px;
     padding: 18px;
+    margin-bottom: 22px;
     display: block; // show / hide here
 `;
 
@@ -40,9 +40,13 @@ const InputHabit = styled.input`
     font-weight: 400;
     font-size: 20px;
     line-height: 25px;
-    color: #dbdbdb;
+    color: #666666;
+    padding: 10px;
     ::placeholder {
         color: #d5d5d5;
+    }
+    :focus {
+        outline: 2px solid #d5d5d5;
     }
 `;
 

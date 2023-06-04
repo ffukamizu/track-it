@@ -12,8 +12,8 @@ export default function LoginScreen() {
         <PageBody>
             <img src={Logo} alt="Logo Icon" />
             <FormSection>
-                <Input type="email" placeholder="  email" required value={userEmail} onChange={setUserEmail}></Input>
-                <Input type="password" placeholder="  password" required value={userPassword} onChange={setUserPassword}></Input>
+                <Input type="email" placeholder="email" required value={userEmail} onChange={setUserEmail}></Input>
+                <Input type="password" placeholder="password" required value={userPassword} onChange={setUserPassword}></Input>
                 <SubmitButton type="submit" placeholder="Submit"></SubmitButton>
             </FormSection>
             <Link to={`/cadastro`}>
@@ -57,8 +57,13 @@ const Input = styled.input`
     font-weight: 400;
     font-size: 20px;
     line-height: 25px;
+    color: #666666;
+    padding: 10px;
     ::placeholder {
         color: #d5d5d5;
+    }
+    :focus {
+        outline: 2px solid #d5d5d5;
     }
 `;
 
