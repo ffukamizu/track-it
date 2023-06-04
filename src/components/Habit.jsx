@@ -1,10 +1,13 @@
 import styled from "styled-components";
 
+import Trashbin from './../../public/assets/dump.svg';
+
 export default function Habit() {
     const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"];
 
     return (
         <HabitContainer>
+            <Trash><img src={Trashbin} alt='Trash Button'/></Trash>
             <HabitContent></HabitContent>
             <WeekdayIndicator>
                 {weekDays.map((day, index) => (
@@ -22,6 +25,7 @@ const HabitContainer = styled.li`
     border-radius: 5px;
     padding: 18px;
     margin-bottom: 10px;
+    position: relative;
 `;
 
 const HabitContent = styled.p`
@@ -61,4 +65,17 @@ const DayButton = styled.button`
     font-size: 20px;
     line-height: 25px;
     color: #dbdbdb;
+`;
+
+const Trash = styled.button`
+    height: 15px;
+    width: 15px;
+    right: 7px;
+    top: 10px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
 `;
