@@ -1,5 +1,4 @@
 import ResetStyle from "./style/ResetStyle";
-import styled from "styled-components";
 
 import LoginScreen from "./pages/LoginScreenPage";
 import UserRegister from "./pages/UserRegisterPage";
@@ -12,7 +11,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 export default function App() {
     return (
         <BrowserRouter>
-            <PageBody>
                 <ResetStyle />
                 <Routes>
                     <Route path="/" element={<LoginScreen />} />
@@ -21,11 +19,6 @@ export default function App() {
                     <Route path="/hoje" element={<Today />} />
                     <Route path="/historico" element={<History />} />
                 </Routes>
-            </PageBody>
         </BrowserRouter>
     );
 }
-
-const PageBody = styled.div`
-    height: 100vh;
-`;
