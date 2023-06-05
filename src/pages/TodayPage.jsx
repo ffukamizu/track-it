@@ -10,8 +10,8 @@ import GlobalStyle from "../style/GlobalStyle";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../AuthContext";
 
-const date = dayjs().format('dddd');
-const fullDate = dayjs().format('DD/MM');
+const date = dayjs().format("dddd");
+const fullDate = dayjs().format("DD/MM");
 
 export default function Today() {
     const { token } = useContext(AuthContext);
@@ -32,16 +32,16 @@ export default function Today() {
             .catch((promise) => console.log(promise.response));
     }, [token]);
 
-    
     const currentHabitDone = [];
-    
+
     for (const entry of todayList) {
-        if (entry.done == true)
-        currentHabitDone.push(entry);
+        if (entry.done) {
+            currentHabitDone.push(entry);
+        }
     }
-    
-        setHabitsDone(habitsDone = currentHabitDone.length);
-        setHabitsTotal(habitsTotal = todayList.length);
+
+    setHabitsDone(currentHabitDone.length);
+    setHabitsTotal(todayList.length);
 
     const percentage = Math.round((habitsDone / habitsTotal) * 100);
 
@@ -55,8 +55,8 @@ export default function Today() {
                     <h2 data-test="today">
                         {date}, {fullDate}
                     </h2>
-                    <NoneTodayHabit data-test="today-counter">Nenhum hábito concluído ainda</NoneTodayHabit>
-                    <ResumeTodayHabit data-test="today-counter">{percentage}% dos Hábitos concluídos</ResumeTodayHabit>
+                    {percentage === 0 && <NoneTodayHabit data-test="today-counter">Nenhum hábito concluído ainda</NoneTodayHabit>}
+                    {percentage > 0 && <ResumeTodayHabit data-test="today-counter">{percentage}% dos Hábitos concluídos</ResumeTodayHabit>}
                 </TodayContainer>
                 <HabitListContainer>
                     {todayList.map((item, index) => (
