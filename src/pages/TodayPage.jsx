@@ -1,17 +1,17 @@
-import styled from "styled-components";
-import dayjs from "dayjs";
-import axios from "axios";
+import styled from 'styled-components';
+import dayjs from 'dayjs';
+import axios from 'axios';
 
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import TodayHabit from "../components/TodayHabit";
-import GlobalStyle from "../style/GlobalStyle";
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import TodayHabit from '../components/TodayHabit';
+import GlobalStyle from '../style/GlobalStyle';
 
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../AuthContext";
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../AuthContext';
 
-const date = dayjs().format("dddd");
-const fullDate = dayjs().format("DD/MM");
+const date = dayjs().format('dddd');
+const fullDate = dayjs().format('DD/MM');
 
 export default function Today() {
     const { token } = useContext(AuthContext);
@@ -27,7 +27,7 @@ export default function Today() {
         };
 
         axios
-            .get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config)
+            .get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today', config)
             .then((promise) => setTodayList(promise.data))
             .catch((promise) => console.log(promise.response));
     }, [token]);
@@ -42,7 +42,6 @@ export default function Today() {
 
     setHabitsDone(currentHabitDone.length);
     setHabitsTotal(todayList.length);
-
     const percentage = Math.round((habitsDone / habitsTotal) * 100);
 
     return (
@@ -60,7 +59,10 @@ export default function Today() {
                 </TodayContainer>
                 <HabitListContainer>
                     {todayList.map((item, index) => (
-                        <TodayHabit key={index} content={item} />
+                        <TodayHabit
+                            key={index}
+                            content={item}
+                        />
                     ))}
                 </HabitListContainer>
             </ContentContainer>
@@ -79,7 +81,7 @@ const PageBody = styled.div`
 `;
 
 const NoneTodayHabit = styled.h3`
-    font-family: "Lexend Deca";
+    font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -88,7 +90,7 @@ const NoneTodayHabit = styled.h3`
 `;
 
 const ResumeTodayHabit = styled.h3`
-    font-family: "Lexend Deca";
+    font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -111,7 +113,7 @@ const TodayContainer = styled.div`
     justify-content: space-between;
     margin-bottom: 45px;
     h2 {
-        font-family: "Lexend Deca";
+        font-family: 'Lexend Deca';
         font-style: normal;
         font-weight: 400;
         font-size: 23px;

@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import GlobalStyle from "../style/GlobalStyle";
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import GlobalStyle from '../style/GlobalStyle';
 
 export default function History() {
     return (
@@ -37,7 +37,7 @@ const ContentContainer = styled.div`
 const HistoryTitle = styled.p`
     width: 100px;
     height: 29px;
-    font-family: "Lexend Deca";
+    font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
     font-size: 23px;
@@ -47,7 +47,7 @@ const HistoryTitle = styled.p`
 
 const HistoryDescription = styled.p`
     height: 74px;
-    font-family: "Lexend Deca";
+    font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
     font-size: 17.976px;

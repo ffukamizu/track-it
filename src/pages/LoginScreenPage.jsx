@@ -1,16 +1,16 @@
-import styled from "styled-components";
-import axios from "axios";
-import Logo from "./../../public/assets/logo.svg";
+import styled from 'styled-components';
+import axios from 'axios';
+import Logo from './../../public/assets/logo.svg';
 
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Oval } from "react-loader-spinner";
-import { useContext } from "react";
-import { AuthContext } from "../AuthContext";
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Oval } from 'react-loader-spinner';
+import { useContext } from 'react';
+import { AuthContext } from '../AuthContext';
 
 export default function LoginScreen() {
-    const [userEmail, setUserEmail] = useState("");
-    const [userPassword, setUserPassword] = useState("");
+    const [userEmail, setUserEmail] = useState('');
+    const [userPassword, setUserPassword] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
     const { setToken, setLogInData } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -26,26 +26,29 @@ export default function LoginScreen() {
         setIsDisabled(true);
 
         axios
-            .post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", user)
+            .post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', user)
             .then(userLogInSuccesful)
             .catch((promise) => {
                 alert(`Error: ${promise.response.data.message}`);
                 setIsDisabled(false);
-                setUserEmail("");
-                setUserPassword("");
+                setUserEmail('');
+                setUserPassword('');
             });
     }
 
     function userLogInSuccesful(promise) {
         setToken(promise.data.token);
         setLogInData(promise.data.image);
-        navigate("/hoje");
+        navigate('/hoje');
         setIsDisabled(false);
     }
 
     return (
         <PageBody>
-            <img src={Logo} alt="Logo Icon" />
+            <img
+                src={Logo}
+                alt="Logo Icon"
+            />
             <FormSection onSubmit={userLogIn}>
                 <Input
                     data-test="email-input"
@@ -63,10 +66,17 @@ export default function LoginScreen() {
                     required
                     value={userPassword}
                     onChange={(e) => setUserPassword(e.target.value)}></Input>
-                <SubmitButton data-test="login-btn" disabled={isDisabled} isDisabled={isDisabled} type="submit" placeholder="Submit">
+                <SubmitButton
+                    data-test="login-btn"
+                    disabled={isDisabled}
+                    isDisabled={isDisabled}
+                    type="submit"
+                    placeholder="Submit">
                     Submit
                 </SubmitButton>
-                <Loading data-test="login-btn" isDisabled={isDisabled}>
+                <Loading
+                    data-test="login-btn"
+                    isDisabled={isDisabled}>
                     <Oval
                         height={40}
                         width={40}
@@ -81,7 +91,9 @@ export default function LoginScreen() {
                     />
                 </Loading>
             </FormSection>
-            <UserRegisterLink disabled={isDisabled} data-test="signup-link">
+            <UserRegisterLink
+                disabled={isDisabled}
+                data-test="signup-link">
                 <Link to={`/cadastro`}>Don&apos;t have an account? Sign-up now!</Link>
             </UserRegisterLink>
         </PageBody>
@@ -117,7 +129,7 @@ const Input = styled.input`
     border: 1px solid #d5d5d5;
     border-radius: 5px;
     margin-top: 6px;
-    font-family: "Lexend Deca";
+    font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
@@ -140,14 +152,14 @@ const SubmitButton = styled.button`
     border-style: solid;
     border-radius: 5px;
     margin-top: 6px;
-    font-family: "Lexend Deca";
+    font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
     font-size: 21px;
     line-height: 26px;
     text-align: center;
     color: #ffffff;
-    display: ${(props) => (props.isDisabled ? "none" : "flex")};
+    display: ${(props) => (props.isDisabled ? 'none' : 'flex')};
     justify-content: center;
     align-items: center;
 `;
@@ -159,13 +171,13 @@ const Loading = styled.div`
     border-color: #52b6ff;
     border-style: solid;
     border-radius: 5px;
-    display: ${(props) => (props.isDisabled ? "flex" : "none")};
+    display: ${(props) => (props.isDisabled ? 'flex' : 'none')};
     justify-content: center;
     align-items: center;
 `;
 
 const UserRegisterLink = styled.button`
-    font-family: "Lexend Deca";
+    font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
     font-size: 13.976px;

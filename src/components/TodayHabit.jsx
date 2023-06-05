@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import axios from "axios";
-import CheckMark from "./../../public/assets/check.svg";
+import styled from 'styled-components';
+import axios from 'axios';
+import CheckMark from './../../public/assets/check.svg';
 
-import { useContext, useState } from "react";
-import { AuthContext } from "./../AuthContext";
+import { useContext, useState } from 'react';
+import { AuthContext } from './../AuthContext';
 
 export default function TodayHabit(props) {
     const { token } = useContext(AuthContext);
@@ -33,7 +33,6 @@ export default function TodayHabit(props) {
     function changeHabitColor() {
         setIsCompleted(true);
         window.location.reload();
-
     }
 
     function unchangeHabitColor() {
@@ -45,7 +44,9 @@ export default function TodayHabit(props) {
         <HabitContainer data-test="today-habit-container">
             <div>
                 <HabitContent data-test="today-habit-name">{props.content.name}</HabitContent>
-                <CurrentStreak data-test="today-habit-sequence" isCompleted={isCompleted}>
+                <CurrentStreak
+                    data-test="today-habit-sequence"
+                    isCompleted={isCompleted}>
                     Current streak: {props.content.currentSequence}
                 </CurrentStreak>
                 <AllTimeStreak
@@ -57,8 +58,14 @@ export default function TodayHabit(props) {
                 </AllTimeStreak>
             </div>
             <div>
-                <Check data-test="today-habit-check-btn" isCompleted={isCompleted} onClick={() => toggleHabit(props.content.id)}>
-                    <img src={CheckMark} alt="Check Logo" />
+                <Check
+                    data-test="today-habit-check-btn"
+                    isCompleted={isCompleted}
+                    onClick={() => toggleHabit(props.content.id)}>
+                    <img
+                        src={CheckMark}
+                        alt="Check Logo"
+                    />
                 </Check>
             </div>
         </HabitContainer>
@@ -80,7 +87,7 @@ const HabitContent = styled.p`
     width: 100%;
     left: 32px;
     top: 160px;
-    font-family: "Lexend Deca";
+    font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
@@ -91,21 +98,21 @@ const HabitContent = styled.p`
 `;
 
 const CurrentStreak = styled.p`
-    font-family: "Lexend Deca";
+    font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
     font-size: 13px;
     line-height: 16px;
-    color: ${(props) => (props.isCompleted ? "#8FC549" : "#666666")};
+    color: ${(props) => (props.isCompleted ? '#8FC549' : '#666666')};
 `;
 
 const AllTimeStreak = styled.p`
-    font-family: "Lexend Deca";
+    font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
     font-size: 13px;
     line-height: 16px;
-    color: ${(props) => (props.isCompleted && props.currentSequence >= props.highestSequence && props.currentSequence > 0 ? "#8FC549" : "#666666")};
+    color: ${(props) => (props.isCompleted && props.currentSequence >= props.highestSequence && props.currentSequence > 0 ? '#8FC549' : '#666666')};
 `;
 
 const Check = styled.div`
@@ -115,5 +122,5 @@ const Check = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    background-color: ${(props) => (props.isCompleted ? "#8FC549" : "#EBEBEB")};
+    background-color: ${(props) => (props.isCompleted ? '#8FC549' : '#EBEBEB')};
 `;

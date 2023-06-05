@@ -1,16 +1,16 @@
-import styled from "styled-components";
-import axios from "axios";
+import styled from 'styled-components';
+import axios from 'axios';
 
-import { useContext, useState } from "react";
-import { AuthContext } from "../AuthContext";
-import { Oval } from "react-loader-spinner";
+import { useContext, useState } from 'react';
+import { AuthContext } from '../AuthContext';
+import { Oval } from 'react-loader-spinner';
 
 export default function InputHabitModule(props) {
     const { isOpen, setIsOpen } = props;
 
     const { token } = useContext(AuthContext);
 
-    const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"];
+    const weekDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
 
     const [userHabit, setUserHabit] = useState([]);
     const [selectedDays, setSelectedDays] = useState([]);
@@ -33,7 +33,7 @@ export default function InputHabitModule(props) {
         };
 
         axios
-            .post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", habit, config)
+            .post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', habit, config)
             .then(closeWindow)
             .catch((promise) => console.log(promise.response));
     }
@@ -44,7 +44,7 @@ export default function InputHabitModule(props) {
         } else {
             setIsOpen(false);
             setIsDisabled(false);
-            setUserHabit("");
+            setUserHabit('');
             setSelectedDays([]);
             window.location.reload();
         }
@@ -59,7 +59,10 @@ export default function InputHabitModule(props) {
     }
 
     return (
-        <FormSection data-test="habit-create-container" onSubmit={submitUserHabit} isOpen={isOpen}>
+        <FormSection
+            data-test="habit-create-container"
+            onSubmit={submitUserHabit}
+            isOpen={isOpen}>
             <InputHabit
                 data-test="habit-name-input"
                 type="text"
@@ -83,10 +86,18 @@ export default function InputHabitModule(props) {
                 ))}
             </WeekdayButtonContainer>
             <SubmitButtonContainer>
-                <CancelButton data-test="habit-create-cancel-btn" type="button" disabled={isDisabled} onClick={closeWindow}>
+                <CancelButton
+                    data-test="habit-create-cancel-btn"
+                    type="button"
+                    disabled={isDisabled}
+                    onClick={closeWindow}>
                     Cancel
                 </CancelButton>
-                <SubmitButton data-test="habit-create-save-btn" isDisabled={isDisabled} disabled={isDisabled} type="submit">
+                <SubmitButton
+                    data-test="habit-create-save-btn"
+                    isDisabled={isDisabled}
+                    disabled={isDisabled}
+                    type="submit">
                     Submit
                 </SubmitButton>
                 <Loading isDisabled={isDisabled}>
@@ -114,22 +125,22 @@ const FormSection = styled.form`
     border-radius: 5px;
     padding: 18px;
     margin-bottom: 22px;
-    display: ${(props) => (props.isOpen ? "block" : "none")};
+    display: ${(props) => (props.isOpen ? 'block' : 'none')};
 `;
 
 const DayButton = styled.button`
     width: 30px;
     height: 30px;
-    background: ${(props) => (props.isSelected ? "#cfcfcf" : "#ffffff")};
+    background: ${(props) => (props.isSelected ? '#cfcfcf' : '#ffffff')};
     border: 1px solid #d5d5d5;
     border-radius: 5px;
     box-sizing: border-box;
-    font-family: "Lexend Deca";
+    font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 25px;
-    color: ${(props) => (props.isSelected ? "#ffffff" : "#dbdbdb")};
+    color: ${(props) => (props.isSelected ? '#ffffff' : '#dbdbdb')};
 `;
 
 const InputHabit = styled.input`
@@ -139,7 +150,7 @@ const InputHabit = styled.input`
     border: 1px solid #d5d5d5;
     border-radius: 5px;
     box-sizing: border-box;
-    font-family: "Lexend Deca";
+    font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
@@ -179,7 +190,7 @@ const CancelButton = styled.button`
     border-radius: 4.63636px;
     border-style: solid;
     border-color: #ffffff;
-    font-family: "Lexend Deca";
+    font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
     font-size: 15.976px;
@@ -195,14 +206,14 @@ const SubmitButton = styled.button`
     border-radius: 4.63636px;
     border-style: solid;
     border-color: #52b6ff;
-    font-family: "Lexend Deca";
+    font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
     font-size: 15.976px;
     line-height: 20px;
     text-align: center;
     color: #ffffff;
-    display: ${(props) => (props.isDisabled ? "none" : "flex")};
+    display: ${(props) => (props.isDisabled ? 'none' : 'flex')};
     justify-content: center;
     align-items: center;
 `;
@@ -214,7 +225,7 @@ const Loading = styled.div`
     border-color: #52b6ff;
     border-style: solid;
     border-radius: 5px;
-    display: ${(props) => (props.isDisabled ? "flex" : "none")};
+    display: ${(props) => (props.isDisabled ? 'flex' : 'none')};
     justify-content: center;
     align-items: center;
 `;

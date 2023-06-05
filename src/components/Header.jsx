@@ -1,16 +1,21 @@
-import styled from "styled-components";
-import { useContext } from "react";
-import { AuthContext } from "./../AuthContext";
-
+import styled from 'styled-components';
+import { useContext } from 'react';
+import { AuthContext } from './../AuthContext';
 export default function Header() {
     const { logInData } = useContext(AuthContext);
 
     return (
-        <PageHeader atributo data-test="header">
+        <PageHeader
+            atributo
+            data-test="header">
             <HeaderContainer>
                 <Title>TrackIt</Title>
                 <Profile>
-                    <img data-test="avatar" src={logInData} alt="avatar" />
+                    <img
+                        data-test="avatar"
+                        src={logInData}
+                        alt="avatar"
+                    />
                 </Profile>
             </HeaderContainer>
         </PageHeader>
@@ -41,7 +46,7 @@ const HeaderContainer = styled.div`
 const Title = styled.h1`
     width: 97px;
     height: 49px;
-    font-family: "Playball";
+    font-family: 'Playball';
     font-style: normal;
     font-weight: 400;
     font-size: 39px;

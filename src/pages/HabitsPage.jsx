@@ -1,15 +1,15 @@
-import styled from "styled-components";
-import Plus from "./../../public/assets/plus.svg";
-import axios from "axios";
+import styled from 'styled-components';
+import Plus from './../../public/assets/plus.svg';
+import axios from 'axios';
 
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import InputHabitModule from "../components/InputHabit";
-import Habit from "../components/Habit";
-import GlobalStyle from "../style/GlobalStyle";
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import InputHabitModule from '../components/InputHabit';
+import Habit from '../components/Habit';
+import GlobalStyle from '../style/GlobalStyle';
 
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../AuthContext";
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../AuthContext';
 
 export default function Habits() {
     const { token } = useContext(AuthContext);
@@ -25,7 +25,7 @@ export default function Habits() {
         };
 
         axios
-            .get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config)
+            .get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', config)
             .then((promise) => setHabitList(promise.data))
             .catch((promise) => console.log(promise.response));
     }, [token]);
@@ -38,15 +38,26 @@ export default function Habits() {
             <ContentContainer>
                 <AddHabitContainer>
                     <h2>My habits</h2>
-                    <PlusButton data-test="habit-create-btn" onClick={() => setIsOpen(true)}>
-                        <img src={Plus} alt="Add Habit Button" />
+                    <PlusButton
+                        data-test="habit-create-btn"
+                        onClick={() => setIsOpen(true)}>
+                        <img
+                            src={Plus}
+                            alt="Add Habit Button"
+                        />
                     </PlusButton>
                 </AddHabitContainer>
-                <InputHabitModule isOpen={isOpen} setIsOpen={setIsOpen} />
+                <InputHabitModule
+                    isOpen={isOpen}
+                    setIsOpen={setIsOpen}
+                />
                 {habitList.length === 0 ? <NoHabitMessage>You don&apos;t have any registered habit. Add one now to begin tracking!</NoHabitMessage> : null}
                 <HabitListContainer>
                     {habitList.map((item, index) => (
-                        <Habit key={index} content={item} />
+                        <Habit
+                            key={index}
+                            content={item}
+                        />
                     ))}
                 </HabitListContainer>
             </ContentContainer>
@@ -79,7 +90,7 @@ const AddHabitContainer = styled.div`
     align-items: center;
     margin-bottom: 30px;
     h2 {
-        font-family: "Lexend Deca";
+        font-family: 'Lexend Deca';
         font-style: normal;
         font-weight: 400;
         font-size: 23px;
@@ -103,7 +114,7 @@ const PlusButton = styled.button`
 const NoHabitMessage = styled.p`
     width: 340px;
     height: 74px;
-    font-family: "Lexend Deca";
+    font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
     font-size: 18px;

@@ -1,44 +1,50 @@
-import styled from "styled-components";
-import "./../../node_modules/react-circular-progressbar/dist/styles.css";
+import styled from 'styled-components';
+import './../../node_modules/react-circular-progressbar/dist/styles.css';
 
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "./../AuthContext";
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from './../AuthContext';
 
 export default function Footer() {
     const { habitsDone, habitsTotal } = useContext(AuthContext);
 
     const percentage = (habitsDone / habitsTotal) * 100;
-    
+
     return (
         <PageFooter data-test="menu">
             <FooterContainer>
-                <Link data-test="habit-link" to={`/habitos`}>
+                <Link
+                    data-test="habit-link"
+                    to={`/habitos`}>
                     Habit
                 </Link>
-                <Link data-test="today-link" to={`/hoje`}>
+                <Link
+                    data-test="today-link"
+                    to={`/hoje`}>
                     <ProgressIndicatorContainer>
                         <CircularProgressbar
                             background
                             backgroundPadding={6}
                             value={percentage}
-                            text={"Today"}
+                            text={'Today'}
                             styles={buildStyles({
                                 rotation: 0.25,
-                                strokeLinecap: "round",
-                                textSize: "18px",
+                                strokeLinecap: 'round',
+                                textSize: '18px',
                                 pathTransitionDuration: 0.5,
                                 pathColor: `rgba(255, 255, 255, 1)`,
-                                textColor: "#ffffff",
-                                trailColor: "#52B6FF",
-                                backgroundColor: "#52B6FF",
-                                transform: "rotate(0.25turn)",
+                                textColor: '#ffffff',
+                                trailColor: '#52B6FF',
+                                backgroundColor: '#52B6FF',
+                                transform: 'rotate(0.25turn)',
                             })}
                         />
                     </ProgressIndicatorContainer>
                 </Link>
-                <Link data-test="history-link" to={`/historico`}>
+                <Link
+                    data-test="history-link"
+                    to={`/historico`}>
                     History
                 </Link>
             </FooterContainer>
@@ -64,7 +70,7 @@ const FooterContainer = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: "Lexend Deca";
+    font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
     font-size: 18px;

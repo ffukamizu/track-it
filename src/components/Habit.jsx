@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import axios from "axios";
-import Trashbin from "./../../public/assets/dump.svg";
+import styled from 'styled-components';
+import axios from 'axios';
+import Trashbin from './../../public/assets/dump.svg';
 
-import { useContext, useState } from "react";
-import { AuthContext } from "../AuthContext";
+import { useContext, useState } from 'react';
+import { AuthContext } from '../AuthContext';
 
 export default function Habit(props) {
     const { token } = useContext(AuthContext);
@@ -11,7 +11,7 @@ export default function Habit(props) {
     const [close, setClose] = useState(false);
     const [isConfirming, setIsConfirming] = useState(false);
 
-    const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"];
+    const weekDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
 
     function deleteHabit() {
         setIsConfirming(true);
@@ -40,7 +40,9 @@ export default function Habit(props) {
     }
 
     return (
-        <HabitContainer data-test="habit-container" isClosed={close}>
+        <HabitContainer
+            data-test="habit-container"
+            isClosed={close}>
             {isConfirming ? (
                 <ConfirmDialog>
                     <p>Are you sure you want to delete this habit?</p>
@@ -48,14 +50,23 @@ export default function Habit(props) {
                     <button onClick={cancelDeleteHabit}>No</button>
                 </ConfirmDialog>
             ) : (
-                <Trash data-test="habit-delete-btn" onClick={deleteHabit}>
-                    <img src={Trashbin} alt="Trash Button" />
+                <Trash
+                    data-test="habit-delete-btn"
+                    onClick={deleteHabit}>
+                    <img
+                        src={Trashbin}
+                        alt="Trash Button"
+                    />
                 </Trash>
             )}
             <HabitContent data-test="habit-name">{props.content.name}</HabitContent>
             <WeekdayIndicator>
                 {weekDays.map((day, index) => (
-                    <DayIcon data-test="habit-day" type="button" key={index} active={props.content.days.includes(index)}>
+                    <DayIcon
+                        data-test="habit-day"
+                        type="button"
+                        key={index}
+                        active={props.content.days.includes(index)}>
                         {day}
                     </DayIcon>
                 ))}
@@ -70,7 +81,7 @@ const HabitContainer = styled.li`
     padding: 18px;
     margin-bottom: 10px;
     position: relative;
-    display: ${(props) => (props.isClosed ? "none" : "block")};
+    display: ${(props) => (props.isClosed ? 'none' : 'block')};
 `;
 
 const HabitContent = styled.p`
@@ -78,7 +89,7 @@ const HabitContent = styled.p`
     width: 100%;
     left: 32px;
     top: 160px;
-    font-family: "Lexend Deca";
+    font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
@@ -103,13 +114,13 @@ const DayIcon = styled.button`
     border: 1px solid #d5d5d5;
     border-radius: 5px;
     box-sizing: border-box;
-    font-family: "Lexend Deca";
+    font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 25px;
-    color: ${(props) => (props.active ? "#ffffff" : "#dbdbdb")};
-    background-color: ${(props) => (props.active ? "#CFCFCF" : "#ffffff")};
+    color: ${(props) => (props.active ? '#ffffff' : '#dbdbdb')};
+    background-color: ${(props) => (props.active ? '#CFCFCF' : '#ffffff')};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -131,7 +142,7 @@ const Trash = styled.button`
 const ConfirmDialog = styled.div`
     height: 78px;
     width: 320px;
-    font-family: "Lexend Deca";
+    font-family: 'Lexend Deca';
     background-color: #126ba5;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -149,7 +160,7 @@ const ConfirmDialog = styled.div`
     }
 
     button {
-        font-family: "Lexend Deca";
+        font-family: 'Lexend Deca';
         margin-right: 8px;
         padding: 8px 16px;
         border-radius: 4px;
