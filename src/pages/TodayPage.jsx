@@ -27,7 +27,7 @@ export default function Today() {
 
         axios
             .get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config)
-            .then((promise) => console.log(promise.data))
+            .then((promise) => setTodayList(promise.data))
             .catch((promise) => console.log(promise.response));
     }, [token]);
 

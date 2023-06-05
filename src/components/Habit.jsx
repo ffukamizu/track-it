@@ -7,12 +7,17 @@ import { AuthContext } from "../AuthContext";
 
 export default function Habit(props) {
     const { token } = useContext(AuthContext);
-    
+
     const [close, setClose] = useState(false);
+    const [isConfirming, setIsConfirming] = useState(false);
 
     const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"];
 
     function deleteHabit() {
+        setIsConfirming(true);
+    }
+
+    function confirmDeleteHabit() {
         const config = {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -29,11 +34,23 @@ export default function Habit(props) {
         setClose(true);
     }
 
+    function cancelDeleteHabit() {
+        setIsConfirming(false);
+    }
+
     return (
         <HabitContainer isClosed={close}>
-            <Trash onClick={deleteHabit}>
-                <img src={Trashbin} alt="Trash Button" />
-            </Trash>
+            {isConfirming ? (
+                <ConfirmDialog>
+                    <p>Are you sure you want to delete this habit?</p>
+                    <button onClick={confirmDeleteHabit}>Yes</button>
+                    <button onClick={cancelDeleteHabit}>No</button>
+                </ConfirmDialog>
+            ) : (
+                <Trash onClick={deleteHabit}>
+                    <img src={Trashbin} alt="Trash Button" />
+                </Trash>
+            )}
             <HabitContent>{props.content.name}</HabitContent>
             <WeekdayIndicator>
                 {weekDays.map((day, index) => (
@@ -52,7 +69,7 @@ const HabitContainer = styled.li`
     padding: 18px;
     margin-bottom: 10px;
     position: relative;
-    display: ${(props) => (props.isClosed ? 'none' : 'block')};
+    display: ${(props) => (props.isClosed ? "none" : "block")};
 `;
 
 const HabitContent = styled.p`
@@ -108,4 +125,39 @@ const Trash = styled.button`
     align-items: center;
     background-color: transparent;
     border: none;
+`;
+
+const ConfirmDialog = styled.div`
+    height: 78px;
+    width: 320px;
+    font-family: "Lexend Deca";
+    background-color: #126ba5;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: center;
+    position: absolute;
+    font-size: 14px;
+    top: 0px;
+    left: 0px;
+    z-index: 3;
+
+    p {
+        margin-bottom: 16px;
+        color: #ffffff;
+    }
+
+    button {
+        font-family: "Lexend Deca";
+        margin-right: 8px;
+        padding: 8px 16px;
+        border-radius: 4px;
+        border: none;
+        background-color: #f2f2f2;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #e2e2e2;
+        }
+    }
 `;

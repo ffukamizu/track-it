@@ -1,13 +1,22 @@
 import styled from "styled-components";
+import axios from "axios";
 import CheckMark from "./../../public/assets/check.svg";
 
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../AuthContext";
+
 export default function TodayHabit(props) {
+    const { token } = useContext(AuthContext);
+
+    function completeHabit() {
+        
+    }
     return (
         <HabitContainer>
             <div>
-                <HabitContent>df</HabitContent>
-                <CurrentStreak>df</CurrentStreak>
-                <AllTimeStreak>df</AllTimeStreak>
+                <HabitContent>{props.content.name}</HabitContent>
+                <CurrentStreak>Current streak: {props.content.currentSequence}</CurrentStreak>
+                <AllTimeStreak>Highest sequence: {props.content.highestSequence}</AllTimeStreak>
             </div>
             <div>
                 <Check>
@@ -26,7 +35,7 @@ const HabitContainer = styled.li`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    `;
+`;
 
 const HabitContent = styled.p`
     min-height: 25px;
@@ -68,5 +77,5 @@ const Check = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    background-color: #8fc549;
+    background-color: #ebebeb;
 `;
