@@ -15,6 +15,7 @@ const fullDate = dayjs().format('DD/MM');
 
 export default function Today() {
     const { token } = useContext(AuthContext);
+    let { habitsTotal, setHabitsTotal } = useContext(AuthContext);
 
     const [todayList, setTodayList] = useState([]);
 
@@ -31,6 +32,8 @@ export default function Today() {
             .catch((promise) => console.log(promise.response));
     }, [token]);
 
+    setHabitsTotal(habitsTotal = todayList.length);
+
     return (
         <PageBody>
             <GlobalStyle />
@@ -41,11 +44,11 @@ export default function Today() {
                     <h2>
                         {date}, {fullDate}
                     </h2>
-                    <h3>No habit completed yet</h3>
+                    <h3>Nenhum hábito concluído ainda</h3>
                 </TodayContainer>
                 <HabitListContainer>
                     {todayList.map((item, index) => (
-                        <TodayHabit key={index} content={item}/>
+                        <TodayHabit key={index} content={item} />
                     ))}
                 </HabitListContainer>
             </ContentContainer>

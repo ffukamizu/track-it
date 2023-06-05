@@ -7,9 +7,10 @@ import { useContext } from "react";
 import { AuthContext } from "./../AuthContext";
 
 export default function Footer() {
-    const { token } = useContext(AuthContext);
-    const percentage = 70;
+    const { habitsDone, habitsTotal } = useContext(AuthContext);
 
+    const percentage = (habitsDone / habitsTotal) * 100;
+    
     return (
         <PageFooter>
             <FooterContainer>

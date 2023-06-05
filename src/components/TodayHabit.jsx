@@ -7,6 +7,7 @@ import { AuthContext } from "./../AuthContext";
 
 export default function TodayHabit(props) {
     const { token } = useContext(AuthContext);
+    let { habitsDone, setHabitsDone } = useContext(AuthContext);
 
     const [isCompleted, setIsCompleted] = useState(props.content.done);
 
@@ -32,10 +33,13 @@ export default function TodayHabit(props) {
 
     function changeHabitColor() {
         setIsCompleted(true);
+        setHabitsDone(habitsDone = habitsDone + 1);
+
     }
 
     function unchangeHabitColor() {
         setIsCompleted(false);
+        setHabitsDone((habitsDone = habitsDone - 1));
     }
 
     return (

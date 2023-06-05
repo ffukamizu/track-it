@@ -5,9 +5,13 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const storedToken = localStorage.getItem("token");
     const storedLogInData = localStorage.getItem("logInData");
+    const storedHabitsDone = localStorage.getItem("habitsDone");
+    const storedHabitsTotal = localStorage.getItem("habitsTotal");
 
     const [token, setToken] = useState(storedToken || null);
     const [logInData, setLogInData] = useState(storedLogInData || null);
+    const [habitsDone, setHabitsDone] = useState(parseInt(storedHabitsDone) || 0);
+    const [habitsTotal, setHabitsTotal] = useState(parseInt(storedHabitsTotal) || 0);
 
     useEffect(() => {
         if (token) {
@@ -25,5 +29,38 @@ export const AuthProvider = ({ children }) => {
         }
     }, [logInData]);
 
-    return <AuthContext.Provider value={{ token, setToken, logInData, setLogInData }}>{children}</AuthContext.Provider>;
+    useEffect(() => {
+        if (habitsDone) {
+            localStorage.setItem("habitsDone", habitsDone);
+        } else {
+            localStorage.removeItem("habitsDone");
+        }
+    }, [habitsDone]);
+
+    useEffect(() => {
+        if (habitsTotal) {
+            localStorage.setItem("habitsTotal", habitsTotal);
+        } else {
+            localStorage.removeItem("habitsTotal");
+        }
+    }, [habitsTotal]);
+
+    console.log(habitsDone);
+    console.log(habitsTotal);
+
+    return (
+        <AuthContext.Provider
+            value={{
+                token,
+                setToken,
+                logInData,
+                setLogInData,
+                habitsDone,
+                setHabitsDone,
+                habitsTotal,
+                setHabitsTotal,
+            }}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
