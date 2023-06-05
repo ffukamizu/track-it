@@ -6,11 +6,11 @@ export default function Header() {
     const { logInData } = useContext(AuthContext);
 
     return (
-        <PageHeader>
+        <PageHeader atributo data-test="header">
             <HeaderContainer>
                 <Title>TrackIt</Title>
                 <Profile>
-                    <img src={logInData} alt="avatar" />
+                    <img data-test="avatar" src={logInData} alt="avatar" />
                 </Profile>
             </HeaderContainer>
         </PageHeader>

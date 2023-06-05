@@ -55,8 +55,9 @@ export default function InputHabitModule(props) {
     }
 
     return (
-        <FormSection onSubmit={submitUserHabit} isOpen={isOpen}>
+        <FormSection data-test="habit-create-container" onSubmit={submitUserHabit} isOpen={isOpen}>
             <InputHabit
+                data-test="habit-name-input"
                 type="text"
                 disabled={isDisabled}
                 placeholder="nome do hábito"
@@ -66,16 +67,22 @@ export default function InputHabitModule(props) {
             />
             <WeekdayButtonContainer>
                 {weekDays.map((day, index) => (
-                    <DayButton type="button" disabled={isDisabled} key={index} onClick={() => toggleDay(index)} isSelected={selectedDays.includes(index)}>
+                    <DayButton
+                        data-test="habit-day"
+                        type="button"
+                        disabled={isDisabled}
+                        key={index}
+                        onClick={() => toggleDay(index)}
+                        isSelected={selectedDays.includes(index)}>
                         {day}
                     </DayButton>
                 ))}
             </WeekdayButtonContainer>
             <SubmitButtonContainer>
-                <CancelButton type="button" disabled={isDisabled} onClick={closeWindow}>
+                <CancelButton data-test="habit-create-cancel-btn" type="button" disabled={isDisabled} onClick={closeWindow}>
                     Cancel
                 </CancelButton>
-                <SubmitButton isDisabled={isDisabled} disabled={isDisabled} type="submit">
+                <SubmitButton data-test="habit-create-save-btn" isDisabled={isDisabled} disabled={isDisabled} type="submit">
                     Submit
                 </SubmitButton>
                 <Loading isDisabled={isDisabled}>

@@ -12,10 +12,12 @@ export default function Footer() {
     const percentage = (habitsDone / habitsTotal) * 100;
     
     return (
-        <PageFooter>
+        <PageFooter data-test="menu">
             <FooterContainer>
-                <Link to={`/habitos`}>Habit</Link>
-                <Link to={`/hoje`}>
+                <Link data-test="habit-link" to={`/habitos`}>
+                    Habit
+                </Link>
+                <Link data-test="today-link" to={`/hoje`}>
                     <ProgressIndicatorContainer>
                         <CircularProgressbar
                             background
@@ -36,7 +38,9 @@ export default function Footer() {
                         />
                     </ProgressIndicatorContainer>
                 </Link>
-                <Link to={`/historico`}>History</Link>
+                <Link data-test="history-link" to={`/historico`}>
+                    History
+                </Link>
             </FooterContainer>
         </PageFooter>
     );

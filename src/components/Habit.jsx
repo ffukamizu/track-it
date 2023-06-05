@@ -40,7 +40,7 @@ export default function Habit(props) {
     }
 
     return (
-        <HabitContainer isClosed={close}>
+        <HabitContainer data-test="habit-container" isClosed={close}>
             {isConfirming ? (
                 <ConfirmDialog>
                     <p>Are you sure you want to delete this habit?</p>
@@ -48,14 +48,14 @@ export default function Habit(props) {
                     <button onClick={cancelDeleteHabit}>No</button>
                 </ConfirmDialog>
             ) : (
-                <Trash onClick={deleteHabit}>
+                <Trash data-test="habit-delete-btn" onClick={deleteHabit}>
                     <img src={Trashbin} alt="Trash Button" />
                 </Trash>
             )}
-            <HabitContent>{props.content.name}</HabitContent>
+            <HabitContent data-test="habit-name">{props.content.name}</HabitContent>
             <WeekdayIndicator>
                 {weekDays.map((day, index) => (
-                    <DayIcon type="button" key={index} active={props.content.days.includes(index)}>
+                    <DayIcon data-test="habit-day" type="button" key={index} active={props.content.days.includes(index)}>
                         {day}
                     </DayIcon>
                 ))}

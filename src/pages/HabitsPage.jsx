@@ -38,7 +38,7 @@ export default function Habits() {
             <ContentContainer>
                 <AddHabitContainer>
                     <h2>My habits</h2>
-                    <PlusButton onClick={() => setIsOpen(true)}>
+                    <PlusButton data-test="habit-create-btn" onClick={() => setIsOpen(true)}>
                         <img src={Plus} alt="Add Habit Button" />
                     </PlusButton>
                 </AddHabitContainer>

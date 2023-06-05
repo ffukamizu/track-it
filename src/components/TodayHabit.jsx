@@ -43,14 +43,14 @@ export default function TodayHabit(props) {
     }
 
     return (
-        <HabitContainer onClick={() => toggleHabit(props.content.id)}>
+        <HabitContainer data-test="today-habit-container" >
             <div>
-                <HabitContent>{props.content.name}</HabitContent>
-                <CurrentStreak>Current streak: {props.content.currentSequence}</CurrentStreak>
-                <AllTimeStreak>Highest sequence: {props.content.highestSequence}</AllTimeStreak>
+                <HabitContent data-test="today-habit-name">{props.content.name}</HabitContent>
+                <CurrentStreak data-test="today-habit-sequence">Current streak: {props.content.currentSequence}</CurrentStreak>
+                <AllTimeStreak data-test="today-habit-record">Highest sequence: {props.content.highestSequence}</AllTimeStreak>
             </div>
             <div>
-                <Check isCompleted={isCompleted}>
+                <Check data-test="today-habit-check-btn" isCompleted={isCompleted} onClick={() => toggleHabit(props.content.id)}>
                     <img src={CheckMark} alt="Check Logo" />
                 </Check>
             </div>

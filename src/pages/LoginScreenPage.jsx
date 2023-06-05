@@ -47,15 +47,25 @@ export default function LoginScreen() {
         <PageBody>
             <img src={Logo} alt="Logo Icon" />
             <FormSection onSubmit={userLogIn}>
-                <Input disabled={isDisabled} type="email" placeholder="email" required value={userEmail} onChange={(e) => setUserEmail(e.target.value)}></Input>
                 <Input
+                    data-test="email-input"
+                    disabled={isDisabled}
+                    type="email"
+                    placeholder="email"
+                    required
+                    value={userEmail}
+                    onChange={(e) => setUserEmail(e.target.value)}></Input>
+                <Input
+                    data-test="password-input"
                     disabled={isDisabled}
                     type="password"
                     placeholder="password"
                     required
                     value={userPassword}
                     onChange={(e) => setUserPassword(e.target.value)}></Input>
-                <SubmitButton isDisabled={isDisabled} disabled={isDisabled} type="submit" placeholder="Submit">Submit</SubmitButton>
+                <SubmitButton data-test="login-btn" isDisabled={isDisabled} disabled={isDisabled} type="submit" placeholder="Submit">
+                    Submit
+                </SubmitButton>
                 <Loading isDisabled={isDisabled}>
                     <Oval
                         height={40}
@@ -72,7 +82,7 @@ export default function LoginScreen() {
                 </Loading>
             </FormSection>
             <Link to={`/cadastro`}>
-                <UserRegisterLink>Don&apos;t have an account? Sign-up now!</UserRegisterLink>
+                <UserRegisterLink data-test="signup-link">Don&apos;t have an account? Sign-up now!</UserRegisterLink>
             </Link>
         </PageBody>
     );

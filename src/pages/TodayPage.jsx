@@ -53,11 +53,11 @@ export default function Today() {
             <HorizontalSeparator></HorizontalSeparator>
             <ContentContainer>
                 <TodayContainer>
-                    <h2>
+                    <h2 data-test="today">
                         {date}, {fullDate}
                     </h2>
-                    <NoneTodayHabit>Nenhum hábito concluído ainda</NoneTodayHabit>
-                    <ResumeTodayHabit>{percentage}% dos Hábitos concluídos</ResumeTodayHabit>
+                    <NoneTodayHabit data-test="today-counter">Nenhum hábito concluído ainda</NoneTodayHabit>
+                    <ResumeTodayHabit data-test="today-counter">{percentage}% dos Hábitos concluídos</ResumeTodayHabit>
                 </TodayContainer>
                 <HabitListContainer>
                     {todayList.map((item, index) => (

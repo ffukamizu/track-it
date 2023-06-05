@@ -50,17 +50,41 @@ export default function UserRegister() {
         <PageBody>
             <img src={Logo} alt="Logo Icon" />
             <FormSection onSubmit={registerUser}>
-                <Input disabled={isDisabled} type="email" placeholder="email" required value={email} onChange={(e) => setEmail(e.target.value)}></Input>
                 <Input
+                    data-test="email-input"
+                    disabled={isDisabled}
+                    type="email"
+                    placeholder="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}></Input>
+                <Input
+                    data-test="password-input"
                     disabled={isDisabled}
                     type="password"
                     placeholder="password"
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}></Input>
-                <Input disabled={isDisabled} type="text" placeholder="name" required value={name} onChange={(e) => setName(e.target.value)}></Input>
-                <Input disabled={isDisabled} type="text" placeholder="image" required value={image} onChange={(e) => setImage(e.target.value)}></Input>
-                <SubmitButton isDisabled={isDisabled} disabled={isDisabled} type="submit" placeholder="Register">Submit</SubmitButton>
+                <Input
+                    data-test="user-name-input"
+                    disabled={isDisabled}
+                    type="text"
+                    placeholder="name"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}></Input>
+                <Input
+                    data-test="user-image-input"
+                    disabled={isDisabled}
+                    type="text"
+                    placeholder="image"
+                    required
+                    value={image}
+                    onChange={(e) => setImage(e.target.value)}></Input>
+                <SubmitButton data-test="signup-btn" isDisabled={isDisabled} disabled={isDisabled} type="submit" placeholder="Register">
+                    Submit
+                </SubmitButton>
                 <Loading isDisabled={isDisabled}>
                     <Oval
                         height={40}
@@ -76,7 +100,7 @@ export default function UserRegister() {
                     />
                 </Loading>
             </FormSection>
-            <Link to={`/`}>
+            <Link data-test="login-link" to={`/`}>
                 <UserRegisterLink>Already have an account? Log-in now!</UserRegisterLink>
             </Link>
         </PageBody>
@@ -158,7 +182,6 @@ const Loading = styled.div`
     justify-content: center;
     align-items: center;
 `;
-
 
 const UserRegisterLink = styled.p`
     font-family: "Lexend Deca";
