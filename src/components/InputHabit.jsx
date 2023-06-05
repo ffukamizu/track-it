@@ -41,12 +41,13 @@ export default function InputHabitModule(props) {
     function closeWindow() {
         if (isDisabled) {
             return;
+        } else {
+            setIsOpen(false);
+            setIsDisabled(false);
+            setUserHabit("");
+            setSelectedDays([]);
+            window.location.reload();
         }
-        setIsOpen(false);
-        setIsDisabled(false);
-        setUserHabit("");
-        setSelectedDays([]);
-        window.location.reload();
     }
 
     function toggleDay(dayIndex) {
