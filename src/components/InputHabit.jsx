@@ -4,18 +4,22 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { AuthContext } from "../AuthContext";
 
-export default function InputHabitModule() {
+export default function InputHabitModule(props) {
+    const { isOpen, setIsOpen } = props;
+
     const { token } = useContext(AuthContext);
 
     const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"];
 
     const [userHabit, setUserHabit] = useState([]);
+    const [selectedDays, setSelectedDays] = useState([]);
 
     function submitUserHabit(e) {
+        e.preventDefault();
 
         const habit = {
             name: userHabit,
-            days: [0, 1, 2],
+            days: selectedDays,
         };
 
         const config = {
@@ -26,22 +30,36 @@ export default function InputHabitModule() {
 
         axios
             .post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", habit, config)
-            .then("close this window")
+            .then(closeWindow)
             .catch((promise) => console.log(promise.response));
     }
 
+    function closeWindow() {
+        setIsOpen(false);
+    }
+
+    function toggleDay(dayIndex) {
+        if (selectedDays.includes(dayIndex)) {
+            setSelectedDays(selectedDays.filter((day) => day !== dayIndex));
+        } else {
+            setSelectedDays([...selectedDays, dayIndex]);
+        }
+    }
+
     return (
-        <FormSection onSubmit={submitUserHabit}>
-            <InputHabit type="text" placeholder="nome do hábito" required value={userHabit} onChange={(e) => setUserHabit(e.target.value)}></InputHabit>
+        <FormSection onSubmit={submitUserHabit} isOpen={isOpen}>
+            <InputHabit type="text" placeholder="nome do hábito" required value={userHabit} onChange={(e) => setUserHabit(e.target.value)} />
             <WeekdayButtonContainer>
                 {weekDays.map((day, index) => (
-                    <DayButton type="button" key={index}>
+                    <DayButton type="button" key={index} onClick={() => toggleDay(index)} isSelected={selectedDays.includes(index)}>
                         {day}
                     </DayButton>
                 ))}
             </WeekdayButtonContainer>
             <SubmitButtonContainer>
-                <CancelButton type="button">Cancel</CancelButton>
+                <CancelButton type="button" onClick={closeWindow}>
+                    Cancel
+                </CancelButton>
                 <SubmitButton type="submit">Submit</SubmitButton>
             </SubmitButtonContainer>
         </FormSection>
@@ -54,7 +72,22 @@ const FormSection = styled.form`
     border-radius: 5px;
     padding: 18px;
     margin-bottom: 22px;
-    display: block; // show / hide here
+    display: ${(props) => (props.isOpen ? "block" : "none")};
+`;
+
+const DayButton = styled.button`
+    width: 30px;
+    height: 30px;
+    background: ${(props) => (props.isSelected ? "#cfcfcf" : "#ffffff")};
+    border: 1px solid #d5d5d5;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: "Lexend Deca";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    color: ${(props) => (props.isSelected ? "#ffffff" : "#dbdbdb")};
 `;
 
 const InputHabit = styled.input`
@@ -95,21 +128,6 @@ const SubmitButtonContainer = styled.div`
     display: flex;
     justify-content: flex-end;
     align-items: end;
-`;
-
-const DayButton = styled.button`
-    width: 30px;
-    height: 30px;
-    background: #ffffff;
-    border: 1px solid #d5d5d5;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-family: "Lexend Deca";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 25px;
-    color: #dbdbdb;
 `;
 
 const CancelButton = styled.button`

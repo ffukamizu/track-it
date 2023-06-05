@@ -15,13 +15,14 @@ export default function Habits() {
     const { token } = useContext(AuthContext);
 
     const [habitList, setHabitList] = useState([]);
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         const config = {
             headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }
+                Authorization: `Bearer ${token}`,
+            },
+        };
 
         axios
             .get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config)
@@ -37,15 +38,15 @@ export default function Habits() {
             <ContentContainer>
                 <AddHabitContainer>
                     <h2>My habits</h2>
-                    <PlusButton>
+                    <PlusButton onClick={() => setIsOpen(true)}>
                         <img src={Plus} alt="Add Habit Button" />
                     </PlusButton>
                 </AddHabitContainer>
-                <InputHabitModule />
-                <NoHabitMessage>You don&apos;t have any registered habit. Add one now to begin tracking!</NoHabitMessage>
+                <InputHabitModule isOpen={isOpen} setIsOpen={setIsOpen} />
+                {habitList.length === 0 ? <NoHabitMessage>You don&apos;t have any registered habit. Add one now to begin tracking!</NoHabitMessage> : null}
                 <HabitListContainer>
                     {habitList.map((item, index) => (
-                        <Habit key={index} content={item}/>
+                        <Habit key={index} content={item} />
                     ))}
                 </HabitListContainer>
             </ContentContainer>
