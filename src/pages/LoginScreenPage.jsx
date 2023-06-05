@@ -41,7 +41,6 @@ export default function LoginScreen() {
         setLogInData(promise.data.image);
         navigate("/habitos");
         setIsDisabled(false);
-        console.log(promise.data);
     }
 
     return (

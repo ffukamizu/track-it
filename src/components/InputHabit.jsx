@@ -4,6 +4,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { AuthContext } from "../AuthContext";
 import { Oval } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 
 export default function InputHabitModule(props) {
     const { isOpen, setIsOpen } = props;
@@ -43,6 +44,7 @@ export default function InputHabitModule(props) {
         setIsDisabled(false);
         setUserHabit("");
         setSelectedDays([]);
+        window.location.reload();
     }
 
     function toggleDay(dayIndex) {

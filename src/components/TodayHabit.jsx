@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import CheckMark from "./../../public/assets/check.svg";
 
-export default function TodayHabit() {
+export default function TodayHabit(props) {
     return (
         <HabitContainer>
             <div>
-                <HabitContent>adas sa sad das asd asd   sdad asdas</HabitContent>
-                <CurrentStreak>asdasd</CurrentStreak>
-                <AllTimeStreak>asdasdad</AllTimeStreak>
+                <HabitContent>df</HabitContent>
+                <CurrentStreak>df</CurrentStreak>
+                <AllTimeStreak>df</AllTimeStreak>
             </div>
             <div>
                 <Check>
