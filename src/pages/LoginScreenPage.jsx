@@ -4,6 +4,7 @@ import Logo from "./../../public/assets/logo.svg";
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Oval } from "react-loader-spinner";
 
 export default function LoginScreen() {
     const [userEmail, setUserEmail] = useState("");
@@ -13,7 +14,7 @@ export default function LoginScreen() {
 
     function userLogIn(e) {
         e.preventDefault();
-        
+
         const user = {
             email: userEmail,
             password: userPassword,
@@ -25,14 +26,14 @@ export default function LoginScreen() {
             .post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", user)
             .then(userLogInSuccesful)
             .catch((promise) => {
-                console.log(promise.response.data)
+                console.log(promise.response.data);
                 setIsDisabled(false);
             });
     }
 
     function userLogInSuccesful(promise) {
         console.log(promise.data);
-        navigate('/habitos');
+        navigate("/habitos");
         setIsDisabled(false);
     }
 
@@ -41,8 +42,28 @@ export default function LoginScreen() {
             <img src={Logo} alt="Logo Icon" />
             <FormSection onSubmit={userLogIn}>
                 <Input disabled={isDisabled} type="email" placeholder="email" required value={userEmail} onChange={(e) => setUserEmail(e.target.value)}></Input>
-                <Input disabled={isDisabled} type="password" placeholder="password" required value={userPassword} onChange={(e) => setUserPassword(e.target.value)}></Input>
-                <SubmitButton disabled={isDisabled} type="submit" placeholder="Submit"></SubmitButton>
+                <Input
+                    disabled={isDisabled}
+                    type="password"
+                    placeholder="password"
+                    required
+                    value={userPassword}
+                    onChange={(e) => setUserPassword(e.target.value)}></Input>
+                <SubmitButton isDisabled={isDisabled} disabled={isDisabled} type="submit" placeholder="Submit">Submit</SubmitButton>
+                <Loading isDisabled={isDisabled}>
+                    <Oval
+                        height={40}
+                        width={40}
+                        color="#ffffff"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                        ariaLabel="oval-loading"
+                        secondaryColor="#bbbbbb"
+                        strokeWidth={6}
+                        strokeWidthSecondary={6}
+                    />
+                </Loading>
             </FormSection>
             <Link to={`/cadastro`}>
                 <UserRegisterLink>Don&apos;t have an account? Sign-up now!</UserRegisterLink>
@@ -95,13 +116,14 @@ const Input = styled.input`
     }
 `;
 
-const SubmitButton = styled.input`
+const SubmitButton = styled.button`
     width: 303px;
     height: 45px;
     background: #52b6ff;
     border-color: #52b6ff;
     border-style: solid;
     border-radius: 5px;
+    margin-top: 6px;
     font-family: "Lexend Deca";
     font-style: normal;
     font-weight: 400;
@@ -109,7 +131,21 @@ const SubmitButton = styled.input`
     line-height: 26px;
     text-align: center;
     color: #ffffff;
-    margin-top: 6px;
+    display: ${(props) => (props.isDisabled ? "none" : "flex")};
+    justify-content: center;
+    align-items: center;
+`;
+
+const Loading = styled.div`
+    width: 303px;
+    height: 45px;
+    background: #52b6ff;
+    border-color: #52b6ff;
+    border-style: solid;
+    border-radius: 5px;
+    display: ${(props) => (props.isDisabled ? "flex" : "none")};
+    justify-content: center;
+    align-items: center;
 `;
 
 const UserRegisterLink = styled.p`

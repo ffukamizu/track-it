@@ -4,6 +4,7 @@ import Logo from "./../../public/assets/logo.svg";
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Oval } from "react-loader-spinner";
 
 export default function UserRegister() {
     const [email, setEmail] = useState("");
@@ -45,13 +46,7 @@ export default function UserRegister() {
         <PageBody>
             <img src={Logo} alt="Logo Icon" />
             <FormSection onSubmit={registerUser}>
-                <Input 
-                    disabled={isDisabled} 
-                    type="email" 
-                    placeholder="email" 
-                    required 
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)}></Input>
+                <Input disabled={isDisabled} type="email" placeholder="email" required value={email} onChange={(e) => setEmail(e.target.value)}></Input>
                 <Input
                     disabled={isDisabled}
                     type="password"
@@ -59,24 +54,23 @@ export default function UserRegister() {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}></Input>
-                <Input 
-                    disabled={isDisabled} 
-                    type="text" 
-                    placeholder="name" 
-                    required 
-                    value={name} 
-                    onChange={(e) => setName(e.target.value)}></Input>
-                <Input 
-                    disabled={isDisabled} 
-                    type="text" 
-                    placeholder="image" 
-                    required 
-                    value={image} 
-                    onChange={(e) => setimage(e.target.value)}></Input>
-                <SubmitButton
-                    disabled={isDisabled} 
-                    type="submit" 
-                    placeholder="Register"></SubmitButton>
+                <Input disabled={isDisabled} type="text" placeholder="name" required value={name} onChange={(e) => setName(e.target.value)}></Input>
+                <Input disabled={isDisabled} type="text" placeholder="image" required value={image} onChange={(e) => setimage(e.target.value)}></Input>
+                <SubmitButton isDisabled={isDisabled} disabled={isDisabled} type="submit" placeholder="Register">Submit</SubmitButton>
+                <Loading isDisabled={isDisabled}>
+                    <Oval
+                        height={40}
+                        width={40}
+                        color="#ffffff"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                        ariaLabel="oval-loading"
+                        secondaryColor="#bbbbbb"
+                        strokeWidth={6}
+                        strokeWidthSecondary={6}
+                    />
+                </Loading>
             </FormSection>
             <Link to={`/`}>
                 <UserRegisterLink>Already have an account? Log-in now!</UserRegisterLink>
@@ -129,7 +123,7 @@ const Input = styled.input`
     }
 `;
 
-const SubmitButton = styled.input`
+const SubmitButton = styled.button`
     width: 303px;
     height: 45px;
     background: #52b6ff;
@@ -144,7 +138,23 @@ const SubmitButton = styled.input`
     text-align: center;
     color: #ffffff;
     margin-top: 6px;
+    display: ${(props) => (props.isDisabled ? "none" : "flex")};
+    justify-content: center;
+    align-items: center;
 `;
+
+const Loading = styled.div`
+    width: 303px;
+    height: 45px;
+    background: #52b6ff;
+    border-color: #52b6ff;
+    border-style: solid;
+    border-radius: 5px;
+    display: ${(props) => (props.isDisabled ? "flex" : "none")};
+    justify-content: center;
+    align-items: center;
+`;
+
 
 const UserRegisterLink = styled.p`
     font-family: "Lexend Deca";
