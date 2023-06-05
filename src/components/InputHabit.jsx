@@ -3,6 +3,7 @@ import axios from "axios";
 
 import { useContext, useState } from "react";
 import { AuthContext } from "../AuthContext";
+import { Oval } from "react-loader-spinner";
 
 export default function InputHabitModule(props) {
     const { isOpen, setIsOpen } = props;
@@ -13,6 +14,7 @@ export default function InputHabitModule(props) {
 
     const [userHabit, setUserHabit] = useState([]);
     const [selectedDays, setSelectedDays] = useState([]);
+    const [isDisabled, setIsDisabled] = useState(false);
 
     function submitUserHabit(e) {
         e.preventDefault();
@@ -21,6 +23,8 @@ export default function InputHabitModule(props) {
             name: userHabit,
             days: selectedDays,
         };
+
+        setIsDisabled(true);
 
         const config = {
             headers: {
@@ -36,6 +40,9 @@ export default function InputHabitModule(props) {
 
     function closeWindow() {
         setIsOpen(false);
+        setIsDisabled(false);
+        setUserHabit("");
+        setSelectedDays([]);
     }
 
     function toggleDay(dayIndex) {
@@ -48,19 +55,42 @@ export default function InputHabitModule(props) {
 
     return (
         <FormSection onSubmit={submitUserHabit} isOpen={isOpen}>
-            <InputHabit type="text" placeholder="nome do hábito" required value={userHabit} onChange={(e) => setUserHabit(e.target.value)} />
+            <InputHabit
+                type="text"
+                disabled={isDisabled}
+                placeholder="nome do hábito"
+                required
+                value={userHabit}
+                onChange={(e) => setUserHabit(e.target.value)}
+            />
             <WeekdayButtonContainer>
                 {weekDays.map((day, index) => (
-                    <DayButton type="button" key={index} onClick={() => toggleDay(index)} isSelected={selectedDays.includes(index)}>
+                    <DayButton type="button" disabled={isDisabled} key={index} onClick={() => toggleDay(index)} isSelected={selectedDays.includes(index)}>
                         {day}
                     </DayButton>
                 ))}
             </WeekdayButtonContainer>
             <SubmitButtonContainer>
-                <CancelButton type="button" onClick={closeWindow}>
+                <CancelButton type="button" disabled={isDisabled} onClick={closeWindow}>
                     Cancel
                 </CancelButton>
-                <SubmitButton type="submit">Submit</SubmitButton>
+                <SubmitButton isDisabled={isDisabled} disabled={isDisabled} type="submit">
+                    Submit
+                </SubmitButton>
+                <Loading isDisabled={isDisabled}>
+                    <Oval
+                        height={30}
+                        width={30}
+                        color="#ffffff"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                        ariaLabel="oval-loading"
+                        secondaryColor="#bbbbbb"
+                        strokeWidth={6}
+                        strokeWidthSecondary={6}
+                    />
+                </Loading>
             </SubmitButtonContainer>
         </FormSection>
     );
@@ -160,4 +190,19 @@ const SubmitButton = styled.button`
     line-height: 20px;
     text-align: center;
     color: #ffffff;
+    display: ${(props) => (props.isDisabled ? "none" : "flex")};
+    justify-content: center;
+    align-items: center;
+`;
+
+const Loading = styled.div`
+    width: 84px;
+    height: 35px;
+    background: #52b6ff;
+    border-color: #52b6ff;
+    border-style: solid;
+    border-radius: 5px;
+    display: ${(props) => (props.isDisabled ? "flex" : "none")};
+    justify-content: center;
+    align-items: center;
 `;

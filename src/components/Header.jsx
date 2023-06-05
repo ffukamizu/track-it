@@ -5,8 +5,6 @@ import { AuthContext } from "./../AuthContext";
 export default function Header() {
     const { logInData } = useContext(AuthContext);
 
-    console.log(logInData);
-
     return (
         <PageHeader>
             <HeaderContainer>
