@@ -10,7 +10,7 @@ export default function UserRegister() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
-    const [image, setimage] = useState("");
+    const [image, setImage] = useState("");
     const [isDisabled, setIsDisabled] = useState(false);
     const navigate = useNavigate();
 
@@ -32,6 +32,10 @@ export default function UserRegister() {
             .catch((promise) => {
                 console.log(promise.response)
                 setIsDisabled(false);
+                setEmail("");
+                setPassword("");
+                setName("");
+                setImage("");
             });
     }
 
@@ -55,7 +59,7 @@ export default function UserRegister() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}></Input>
                 <Input disabled={isDisabled} type="text" placeholder="name" required value={name} onChange={(e) => setName(e.target.value)}></Input>
-                <Input disabled={isDisabled} type="text" placeholder="image" required value={image} onChange={(e) => setimage(e.target.value)}></Input>
+                <Input disabled={isDisabled} type="text" placeholder="image" required value={image} onChange={(e) => setImage(e.target.value)}></Input>
                 <SubmitButton isDisabled={isDisabled} disabled={isDisabled} type="submit" placeholder="Register">Submit</SubmitButton>
                 <Loading isDisabled={isDisabled}>
                     <Oval

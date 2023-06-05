@@ -28,6 +28,8 @@ export default function LoginScreen() {
             .catch((promise) => {
                 console.log(promise.response.data);
                 setIsDisabled(false);
+                setUserEmail("");
+                setUserPassword("");
             });
     }
 
