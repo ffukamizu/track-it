@@ -8,18 +8,34 @@ import { AuthContext } from "../AuthContext";
 export default function TodayHabit(props) {
     const { token } = useContext(AuthContext);
 
-    function completeHabit() {
-        
+    const [isCompleted, setIsCompleted] = useState(false);
+
+    function completeHabit(id) {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+
+        axios
+            .get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, config)
+            .then(changeHabitColor)
+            .catch((promise) => console.log(promise.response));
     }
+
+    function changeHabitColor() {
+        setIsCompleted(true);
+    }
+
     return (
-        <HabitContainer>
+        <HabitContainer onClick={() => completeHabit(props.content.id)}>
             <div>
                 <HabitContent>{props.content.name}</HabitContent>
                 <CurrentStreak>Current streak: {props.content.currentSequence}</CurrentStreak>
                 <AllTimeStreak>Highest sequence: {props.content.highestSequence}</AllTimeStreak>
             </div>
             <div>
-                <Check>
+                <Check isCompleted={isCompleted}>
                     <img src={CheckMark} alt="Check Logo" />
                 </Check>
             </div>
@@ -77,5 +93,5 @@ const Check = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    background-color: #ebebeb;
+    background-color: ${(props) => (props.isCompleted ? "#8FC549" : "#ffffff")};
 `;

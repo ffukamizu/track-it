@@ -32,6 +32,7 @@ export default function Habit(props) {
 
     function closeHabit() {
         setClose(true);
+        window.location.reload();
     }
 
     function cancelDeleteHabit() {
