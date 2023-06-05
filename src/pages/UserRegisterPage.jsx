@@ -80,7 +80,7 @@ export default function UserRegister() {
                     required
                     value={image}
                     onChange={(e) => setImage(e.target.value)}></Input>
-                <SubmitButton data-test="signup-btn" isDisabled={isDisabled} disabled={isDisabled} type="submit" placeholder="Register">
+                <SubmitButton data-test="signup-btn" disabled={isDisabled} isDisabled={isDisabled} type="submit" placeholder="Submit">
                     Submit
                 </SubmitButton>
                 <Loading data-test="signup-btn" isDisabled={isDisabled}>

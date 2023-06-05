@@ -63,7 +63,7 @@ export default function LoginScreen() {
                     required
                     value={userPassword}
                     onChange={(e) => setUserPassword(e.target.value)}></Input>
-                <SubmitButton data-test="login-btn" isDisabled={isDisabled} disabled={isDisabled} type="submit" placeholder="Submit">
+                <SubmitButton data-test="login-btn" disabled={isDisabled} isDisabled={isDisabled} type="submit" placeholder="Submit">
                     Submit
                 </SubmitButton>
                 <Loading data-test="login-btn" isDisabled={isDisabled}>
