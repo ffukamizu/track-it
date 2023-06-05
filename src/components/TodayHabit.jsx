@@ -2,33 +2,44 @@ import styled from "styled-components";
 import axios from "axios";
 import CheckMark from "./../../public/assets/check.svg";
 
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../AuthContext";
+import { useContext, useState } from "react";
+import { AuthContext } from "./../AuthContext";
 
 export default function TodayHabit(props) {
     const { token } = useContext(AuthContext);
 
-    const [isCompleted, setIsCompleted] = useState(false);
+    const [isCompleted, setIsCompleted] = useState(props.content.done);
 
-    function completeHabit(id) {
+    function toggleHabit(id) {
         const config = {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         };
 
-        axios
-            .get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, config)
-            .then(changeHabitColor)
-            .catch((promise) => console.log(promise.response));
+        if (isCompleted) {
+            axios
+                .post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`, null, config)
+                .then(unchangeHabitColor)
+                .catch((promise) => console.log(promise.response));
+        } else {
+            axios
+                .post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, null, config)
+                .then(changeHabitColor)
+                .catch((promise) => console.log(promise.response));
+        }
     }
 
     function changeHabitColor() {
         setIsCompleted(true);
     }
 
+    function unchangeHabitColor() {
+        setIsCompleted(false);
+    }
+
     return (
-        <HabitContainer onClick={() => completeHabit(props.content.id)}>
+        <HabitContainer onClick={() => toggleHabit(props.content.id)}>
             <div>
                 <HabitContent>{props.content.name}</HabitContent>
                 <CurrentStreak>Current streak: {props.content.currentSequence}</CurrentStreak>
@@ -93,5 +104,5 @@ const Check = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    background-color: ${(props) => (props.isCompleted ? "#8FC549" : "#ffffff")};
+    background-color: ${(props) => (props.isCompleted ? "#8FC549" : "#EBEBEB")};
 `;
