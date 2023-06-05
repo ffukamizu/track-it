@@ -15,7 +15,7 @@ const fullDate = dayjs().format('DD/MM');
 
 export default function Today() {
     const { token } = useContext(AuthContext);
-    let { habitsTotal, setHabitsTotal } = useContext(AuthContext);
+    let { habitsDone, setHabitsDone, habitsTotal, setHabitsTotal } = useContext(AuthContext);
 
     const [todayList, setTodayList] = useState([]);
 
@@ -32,7 +32,19 @@ export default function Today() {
             .catch((promise) => console.log(promise.response));
     }, [token]);
 
-    setHabitsTotal(habitsTotal = todayList.length);
+    
+    const currentHabitDone = [];
+    
+    for (const entry of todayList) {
+        if (entry.done == true)
+        currentHabitDone.push(entry);
+    }
+    
+        console.log(currentHabitDone.length);
+        setHabitsDone(habitsDone = currentHabitDone.length);
+        setHabitsTotal(habitsTotal = todayList.length);
+
+    const percentage = Math.round((habitsDone / habitsTotal) * 100);
 
     return (
         <PageBody>
@@ -44,7 +56,8 @@ export default function Today() {
                     <h2>
                         {date}, {fullDate}
                     </h2>
-                    <h3>Nenhum hábito concluído ainda</h3>
+                    <NoneTodayHabit>Nenhum hábito concluído ainda</NoneTodayHabit>
+                    <ResumeTodayHabit>{percentage}% dos Hábitos concluídos</ResumeTodayHabit>
                 </TodayContainer>
                 <HabitListContainer>
                     {todayList.map((item, index) => (
@@ -64,6 +77,24 @@ const PageBody = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+`;
+
+const NoneTodayHabit = styled.h3`
+    font-family: "Lexend Deca";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #bababa;
+`;
+
+const ResumeTodayHabit = styled.h3`
+    font-family: "Lexend Deca";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #8fc549;
 `;
 
 const ContentContainer = styled.div`
@@ -87,14 +118,6 @@ const TodayContainer = styled.div`
         font-size: 23px;
         line-height: 29px;
         color: #126ba5;
-    }
-    h3 {
-        font-family: "Lexend Deca";
-        font-style: normal;
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 22px;
-        color: #bababa;
     }
 `;
 

@@ -45,9 +45,6 @@ export const AuthProvider = ({ children }) => {
         }
     }, [habitsTotal]);
 
-    console.log(habitsDone);
-    console.log(habitsTotal);
-
     return (
         <AuthContext.Provider
             value={{

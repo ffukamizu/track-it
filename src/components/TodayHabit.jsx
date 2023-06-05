@@ -33,13 +33,13 @@ export default function TodayHabit(props) {
 
     function changeHabitColor() {
         setIsCompleted(true);
-        setHabitsDone(habitsDone = habitsDone + 1);
+        window.location.reload();
 
     }
 
     function unchangeHabitColor() {
         setIsCompleted(false);
-        setHabitsDone((habitsDone = habitsDone - 1));
+        window.location.reload();
     }
 
     return (
