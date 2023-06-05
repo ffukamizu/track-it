@@ -39,9 +39,7 @@ export default function UserRegister() {
             });
     }
 
-    function registerSuccesful(promise) {
-        console.log("successful");
-        console.log(promise.data);
+    function registerSuccesful() {
         navigate("/");
         setIsDisabled(false);
     }
