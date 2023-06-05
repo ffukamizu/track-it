@@ -39,6 +39,9 @@ export default function InputHabitModule(props) {
     }
 
     function closeWindow() {
+        if (isDisabled) {
+            return;
+        }
         setIsOpen(false);
         setIsDisabled(false);
         setUserHabit("");
