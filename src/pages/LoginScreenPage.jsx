@@ -5,11 +5,14 @@ import Logo from "./../../public/assets/logo.svg";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Oval } from "react-loader-spinner";
+import { useContext } from "react";
+import { AuthContext } from "../AuthContext";
 
 export default function LoginScreen() {
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
     const [isDisabled, setIsDisabled] = useState(false);
+    const { setToken, setLogInData } = useContext(AuthContext);
     const navigate = useNavigate();
 
     function userLogIn(e) {
@@ -26,7 +29,7 @@ export default function LoginScreen() {
             .post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", user)
             .then(userLogInSuccesful)
             .catch((promise) => {
-                console.log(promise.response.data);
+                alert(`Error: ${promise.response.data.message}`);
                 setIsDisabled(false);
                 setUserEmail("");
                 setUserPassword("");
@@ -34,9 +37,11 @@ export default function LoginScreen() {
     }
 
     function userLogInSuccesful(promise) {
-        console.log(promise.data);
+        setToken(promise.data.token);
+        setLogInData(promise.data.image);
         navigate("/habitos");
         setIsDisabled(false);
+        console.log(promise.data);
     }
 
     return (

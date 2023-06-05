@@ -6,10 +6,15 @@ import Footer from "../components/Footer";
 import TodayHabit from "../components/TodayHabit";
 import GlobalStyle from "../style/GlobalStyle";
 
+import { useContext } from "react";
+import { AuthContext } from "../AuthContext";
+
 const date = dayjs().format('dddd');
 const fullDate = dayjs().format('DD/MM');
 
 export default function Today() {
+    const { token } = useContext(AuthContext);
+
     return (
         <PageBody>
             <GlobalStyle />

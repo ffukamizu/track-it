@@ -1,11 +1,19 @@
 import styled from "styled-components";
+import { useContext } from "react";
+import { AuthContext } from "./../AuthContext";
 
 export default function Header() {
+    const { logInData } = useContext(AuthContext);
+
+    console.log(logInData);
+
     return (
         <PageHeader>
             <HeaderContainer>
                 <Title>TrackIt</Title>
-                <Profile></Profile>
+                <Profile>
+                    <img src={logInData} alt="avatar" />
+                </Profile>
             </HeaderContainer>
         </PageHeader>
     );
@@ -48,4 +56,10 @@ const Profile = styled.div`
     height: 51px;
     border-radius: 50px;
     background-color: #ffffff;
+
+    img {
+        width: 51px;
+        height: 51px;
+        border-radius: 50px;
+    }
 `;

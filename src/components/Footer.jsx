@@ -3,8 +3,11 @@ import "./../../node_modules/react-circular-progressbar/dist/styles.css";
 
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "./../AuthContext";
 
 export default function Footer() {
+    const { token } = useContext(AuthContext);
     const percentage = 70;
 
     return (

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Plus from "./../../public/assets/plus.svg";
+import axios from "axios";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -7,7 +8,27 @@ import InputHabitModule from "../components/InputHabit";
 import Habit from "../components/Habit";
 import GlobalStyle from "../style/GlobalStyle";
 
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../AuthContext";
+
 export default function Habits() {
+    const { token } = useContext(AuthContext);
+
+    const [habitList, setHabitList] = useState([]);
+
+    useEffect(() => {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        axios
+            .get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config)
+            .then((promise) => setHabitList(promise.data))
+            .catch((promise) => console.log(promise.response));
+    }, [token]);
+
     return (
         <PageBody>
             <GlobalStyle />
@@ -23,7 +44,9 @@ export default function Habits() {
                 <InputHabitModule />
                 <NoHabitMessage>You don&apos;t have any registered habit. Add one now to begin tracking!</NoHabitMessage>
                 <HabitListContainer>
-                    <Habit />
+                    {habitList.map((item, index) => (
+                        <Habit key={index} content={item}/>
+                    ))}
                 </HabitListContainer>
             </ContentContainer>
             <HorizontalSeparator></HorizontalSeparator>

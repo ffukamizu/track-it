@@ -1,19 +1,48 @@
 import styled from "styled-components";
+import axios from "axios";
+
+import { useContext, useState } from "react";
+import { AuthContext } from "../AuthContext";
 
 export default function InputHabitModule() {
+    const { token } = useContext(AuthContext);
+
     const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"];
 
+    const [userHabit, setUserHabit] = useState([]);
+
+    function submitUserHabit(e) {
+
+        const habit = {
+            name: userHabit,
+            days: [0, 1, 2],
+        };
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+
+        axios
+            .post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", habit, config)
+            .then("close this window")
+            .catch((promise) => console.log(promise.response));
+    }
+
     return (
-        <FormSection>
-            <InputHabit type='text' placeholder="nome do hábito" required></InputHabit>
+        <FormSection onSubmit={submitUserHabit}>
+            <InputHabit type="text" placeholder="nome do hábito" required value={userHabit} onChange={(e) => setUserHabit(e.target.value)}></InputHabit>
             <WeekdayButtonContainer>
                 {weekDays.map((day, index) => (
-                    <DayButton type='button' key={index}>{day}</DayButton>
+                    <DayButton type="button" key={index}>
+                        {day}
+                    </DayButton>
                 ))}
             </WeekdayButtonContainer>
             <SubmitButtonContainer>
-                <CancelButton type='button'>Cancel</CancelButton>
-                <SubmitButton type='submit'>Submit</SubmitButton>
+                <CancelButton type="button">Cancel</CancelButton>
+                <SubmitButton type="submit">Submit</SubmitButton>
             </SubmitButtonContainer>
         </FormSection>
     );

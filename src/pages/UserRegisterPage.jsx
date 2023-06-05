@@ -30,7 +30,7 @@ export default function UserRegister() {
             .post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", user)
             .then(registerSuccesful)
             .catch((promise) => {
-                console.log(promise.response)
+                alert(`Error: ${promise.response.data.message}`);
                 setIsDisabled(false);
                 setEmail("");
                 setPassword("");

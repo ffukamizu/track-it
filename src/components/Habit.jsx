@@ -1,19 +1,45 @@
 import styled from "styled-components";
+import axios from "axios";
+import Trashbin from "./../../public/assets/dump.svg";
 
-import Trashbin from './../../public/assets/dump.svg';
+import { useContext, useState } from "react";
+import { AuthContext } from "../AuthContext";
 
-export default function Habit() {
+export default function Habit(props) {
+    const { token } = useContext(AuthContext);
+    
+    const [close, setClose] = useState(false);
+
     const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"];
 
+    function deleteHabit() {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+
+        axios
+            .delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${props.content.id}`, config)
+            .then(closeHabit)
+            .catch((promise) => console.log(promise.response));
+    }
+
+    function closeHabit() {
+        setClose(true);
+    }
+
     return (
-        <HabitContainer>
-            <Trash><img src={Trashbin} alt='Trash Button'/></Trash>
-            <HabitContent></HabitContent>
+        <HabitContainer isClosed={close}>
+            <Trash onClick={deleteHabit}>
+                <img src={Trashbin} alt="Trash Button" />
+            </Trash>
+            <HabitContent>{props.content.name}</HabitContent>
             <WeekdayIndicator>
                 {weekDays.map((day, index) => (
-                    <DayButton type="button" key={index}>
+                    <DayIcon type="button" key={index} active={props.content.days.includes(index)}>
                         {day}
-                    </DayButton>
+                    </DayIcon>
                 ))}
             </WeekdayIndicator>
         </HabitContainer>
@@ -26,6 +52,7 @@ const HabitContainer = styled.li`
     padding: 18px;
     margin-bottom: 10px;
     position: relative;
+    display: ${(props) => (props.isClosed ? 'none' : 'block')};
 `;
 
 const HabitContent = styled.p`
@@ -52,10 +79,9 @@ const WeekdayIndicator = styled.div`
     gap: 4px;
 `;
 
-const DayButton = styled.button`
+const DayIcon = styled.button`
     width: 30px;
     height: 30px;
-    background: #ffffff;
     border: 1px solid #d5d5d5;
     border-radius: 5px;
     box-sizing: border-box;
@@ -64,7 +90,11 @@ const DayButton = styled.button`
     font-weight: 400;
     font-size: 20px;
     line-height: 25px;
-    color: #dbdbdb;
+    color: ${(props) => (props.active ? "#ffffff" : "#dbdbdb")};
+    background-color: ${(props) => (props.active ? "#CFCFCF" : "#ffffff")};
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const Trash = styled.button`
