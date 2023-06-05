@@ -40,7 +40,6 @@ export default function Today() {
         currentHabitDone.push(entry);
     }
     
-        console.log(currentHabitDone.length);
         setHabitsDone(habitsDone = currentHabitDone.length);
         setHabitsTotal(habitsTotal = todayList.length);
 

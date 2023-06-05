@@ -98,9 +98,11 @@ export default function UserRegister() {
                     />
                 </Loading>
             </FormSection>
-            <Link data-test="login-link" to={`/`}>
-                <UserRegisterLink>Already have an account? Log-in now!</UserRegisterLink>
-            </Link>
+            <UserRegisterLink disabled={isDisabled}>
+                <Link data-test="login-link" to={`/`}>
+                    Already have an account? Log-in now!
+                </Link>
+            </UserRegisterLink>
         </PageBody>
     );
 }
@@ -181,7 +183,7 @@ const Loading = styled.div`
     align-items: center;
 `;
 
-const UserRegisterLink = styled.p`
+const UserRegisterLink = styled.button`
     font-family: "Lexend Deca";
     font-style: normal;
     font-weight: 400;
@@ -190,4 +192,7 @@ const UserRegisterLink = styled.p`
     text-align: center;
     text-decoration-line: underline;
     color: #52b6ff;
+    background-color: #ffffff;
+    border-style: solid;
+    border-color: #ffffff;
 `;

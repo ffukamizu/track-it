@@ -81,9 +81,9 @@ export default function LoginScreen() {
                     />
                 </Loading>
             </FormSection>
-            <Link to={`/cadastro`}>
-                <UserRegisterLink data-test="signup-link">Don&apos;t have an account? Sign-up now!</UserRegisterLink>
-            </Link>
+            <UserRegisterLink disabled={isDisabled} data-test="signup-link">
+                <Link to={`/cadastro`}>Don&apos;t have an account? Sign-up now!</Link>
+            </UserRegisterLink>
         </PageBody>
     );
 }
@@ -164,7 +164,7 @@ const Loading = styled.div`
     align-items: center;
 `;
 
-const UserRegisterLink = styled.p`
+const UserRegisterLink = styled.button`
     font-family: "Lexend Deca";
     font-style: normal;
     font-weight: 400;
@@ -173,4 +173,7 @@ const UserRegisterLink = styled.p`
     text-align: center;
     text-decoration-line: underline;
     color: #52b6ff;
+    background-color: #ffffff;
+    border-style: solid;
+    border-color: #ffffff;
 `;
