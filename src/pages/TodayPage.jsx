@@ -24,8 +24,6 @@ export default function Today() {
                 </TodayContainer>
                 <HabitListContainer>
                     <TodayHabit />
-                    <TodayHabit />
-                    <TodayHabit />
                 </HabitListContainer>
             </ContentContainer>
             <HorizontalSeparator></HorizontalSeparator>

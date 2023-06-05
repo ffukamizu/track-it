@@ -47,5 +47,5 @@ const Profile = styled.div`
     width: 51px;
     height: 51px;
     border-radius: 50px;
-    background-color: red;
+    background-color: #ffffff;
 `;

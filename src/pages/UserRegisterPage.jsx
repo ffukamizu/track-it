@@ -1,24 +1,82 @@
 import styled from "styled-components";
+import axios from "axios";
 import Logo from "./../../public/assets/logo.svg";
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function UserRegister() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
-    const [photo, setPhoto] = useState("");
+    const [image, setimage] = useState("");
+    const [isDisabled, setIsDisabled] = useState(false);
+    const navigate = useNavigate();
+
+    function registerUser(e) {
+        e.preventDefault();
+
+        const user = {
+            email: email,
+            name: name,
+            image: image,
+            password: password,
+        };
+
+        setIsDisabled(true);
+
+        axios
+            .post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", user)
+            .then(registerSuccesful)
+            .catch((promise) => {
+                console.log(promise.response)
+                setIsDisabled(false);
+            });
+    }
+
+    function registerSuccesful(promise) {
+        console.log("successful");
+        console.log(promise.data);
+        navigate("/");
+        setIsDisabled(false);
+    }
 
     return (
         <PageBody>
             <img src={Logo} alt="Logo Icon" />
-            <FormSection>
-                <Input type="email" placeholder="email" required value={email} onChange={setEmail}></Input>
-                <Input type="password" placeholder="password" required value={password} onChange={setPassword}></Input>
-                <Input type="text" placeholder="name" required value={name} onChange={setName}></Input>
-                <Input type="text" placeholder="photo" required value={photo} onChange={setPhoto}></Input>
-                <SubmitButton type="submit" placeholder="Register"></SubmitButton>
+            <FormSection onSubmit={registerUser}>
+                <Input 
+                    disabled={isDisabled} 
+                    type="email" 
+                    placeholder="email" 
+                    required 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)}></Input>
+                <Input
+                    disabled={isDisabled}
+                    type="password"
+                    placeholder="password"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}></Input>
+                <Input 
+                    disabled={isDisabled} 
+                    type="text" 
+                    placeholder="name" 
+                    required 
+                    value={name} 
+                    onChange={(e) => setName(e.target.value)}></Input>
+                <Input 
+                    disabled={isDisabled} 
+                    type="text" 
+                    placeholder="image" 
+                    required 
+                    value={image} 
+                    onChange={(e) => setimage(e.target.value)}></Input>
+                <SubmitButton
+                    disabled={isDisabled} 
+                    type="submit" 
+                    placeholder="Register"></SubmitButton>
             </FormSection>
             <Link to={`/`}>
                 <UserRegisterLink>Already have an account? Log-in now!</UserRegisterLink>

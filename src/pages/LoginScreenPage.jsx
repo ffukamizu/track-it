@@ -1,20 +1,48 @@
 import styled from "styled-components";
+import axios from "axios";
 import Logo from "./../../public/assets/logo.svg";
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function LoginScreen() {
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
+    const [isDisabled, setIsDisabled] = useState(false);
+    const navigate = useNavigate();
+
+    function userLogIn(e) {
+        e.preventDefault();
+        
+        const user = {
+            email: userEmail,
+            password: userPassword,
+        };
+
+        setIsDisabled(true);
+
+        axios
+            .post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", user)
+            .then(userLogInSuccesful)
+            .catch((promise) => {
+                console.log(promise.response.data)
+                setIsDisabled(false);
+            });
+    }
+
+    function userLogInSuccesful(promise) {
+        console.log(promise.data);
+        navigate('/habitos');
+        setIsDisabled(false);
+    }
 
     return (
         <PageBody>
             <img src={Logo} alt="Logo Icon" />
-            <FormSection>
-                <Input type="email" placeholder="email" required value={userEmail} onChange={setUserEmail}></Input>
-                <Input type="password" placeholder="password" required value={userPassword} onChange={setUserPassword}></Input>
-                <SubmitButton type="submit" placeholder="Submit"></SubmitButton>
+            <FormSection onSubmit={userLogIn}>
+                <Input disabled={isDisabled} type="email" placeholder="email" required value={userEmail} onChange={(e) => setUserEmail(e.target.value)}></Input>
+                <Input disabled={isDisabled} type="password" placeholder="password" required value={userPassword} onChange={(e) => setUserPassword(e.target.value)}></Input>
+                <SubmitButton disabled={isDisabled} type="submit" placeholder="Submit"></SubmitButton>
             </FormSection>
             <Link to={`/cadastro`}>
                 <UserRegisterLink>Don&apos;t have an account? Sign-up now!</UserRegisterLink>
