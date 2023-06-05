@@ -83,7 +83,7 @@ export default function UserRegister() {
                 <SubmitButton data-test="signup-btn" isDisabled={isDisabled} disabled={isDisabled} type="submit" placeholder="Register">
                     Submit
                 </SubmitButton>
-                <Loading isDisabled={isDisabled}>
+                <Loading data-test="signup-btn" isDisabled={isDisabled}>
                     <Oval
                         height={40}
                         width={40}
