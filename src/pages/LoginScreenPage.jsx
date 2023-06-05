@@ -39,7 +39,7 @@ export default function LoginScreen() {
     function userLogInSuccesful(promise) {
         setToken(promise.data.token);
         setLogInData(promise.data.image);
-        navigate("/habitos");
+        navigate("/hoje");
         setIsDisabled(false);
     }
 
