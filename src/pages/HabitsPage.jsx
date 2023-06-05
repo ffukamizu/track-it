@@ -84,7 +84,7 @@ const AddHabitContainer = styled.div`
         font-weight: 400;
         font-size: 23px;
         line-height: 29px;
-        color: #126ba5;
+        color: #52b6ff;
     }
 `;
 
